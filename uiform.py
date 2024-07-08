@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(927, 742)
+        MainWindow.resize(944, 742)
         MainWindow.setStyleSheet("background-color: rgb(229, 255, 255);")
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -177,8 +177,8 @@ class Ui_MainWindow(object):
         self.btn_timKiemsp.setObjectName("btn_timKiemsp")
         self.timKiemsp = QtWidgets.QLineEdit(parent=self.sanPham_page)
         self.timKiemsp.setGeometry(QtCore.QRect(130, 250, 181, 31))
-        self.timKiemsp.setStyleSheet("color: rgb(202, 202, 202);\n"
-"background-color: rgb(255, 255, 255);")
+        self.timKiemsp.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);")
         self.timKiemsp.setObjectName("timKiemsp")
         self.stackedWidget.addWidget(self.sanPham_page)
         self.nhanVien_page = QtWidgets.QWidget()
@@ -299,8 +299,8 @@ class Ui_MainWindow(object):
         self.btn_timKiemnv.setObjectName("btn_timKiemnv")
         self.timKiemnv = QtWidgets.QLineEdit(parent=self.nhanVien_page)
         self.timKiemnv.setGeometry(QtCore.QRect(130, 260, 181, 31))
-        self.timKiemnv.setStyleSheet("color: rgb(202, 202, 202);\n"
-"background-color: rgb(255, 255, 255);")
+        self.timKiemnv.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);")
         self.timKiemnv.setObjectName("timKiemnv")
         self.stackedWidget.addWidget(self.nhanVien_page)
         self.widget = QtWidgets.QWidget()
@@ -523,8 +523,8 @@ class Ui_MainWindow(object):
         self.tbl_donHang.setRowCount(0)
         self.timKiemdh = QtWidgets.QLineEdit(parent=self.donHang_page)
         self.timKiemdh.setGeometry(QtCore.QRect(120, 300, 181, 31))
-        self.timKiemdh.setStyleSheet("color: rgb(202, 202, 202);\n"
-"background-color: rgb(255, 255, 255);")
+        self.timKiemdh.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);")
         self.timKiemdh.setObjectName("timKiemdh")
         self.btn_timKiemdh = QtWidgets.QPushButton(parent=self.donHang_page)
         self.btn_timKiemdh.setGeometry(QtCore.QRect(20, 300, 81, 31))
@@ -669,14 +669,14 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addLayout(self.verticalLayout)
         spacerItem2 = QtWidgets.QSpacerItem(20, 377, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_3.addItem(spacerItem2)
-        self.pushButton_6 = QtWidgets.QPushButton(parent=self.icon_onl_widget)
-        self.pushButton_6.setText("")
+        self.dangXuat_1 = QtWidgets.QPushButton(parent=self.icon_onl_widget)
+        self.dangXuat_1.setText("")
         icon7 = QtGui.QIcon()
         icon7.addPixmap(QtGui.QPixmap("image/log_out_white.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton_6.setIcon(icon7)
-        self.pushButton_6.setCheckable(True)
-        self.pushButton_6.setObjectName("pushButton_6")
-        self.verticalLayout_3.addWidget(self.pushButton_6)
+        self.dangXuat_1.setIcon(icon7)
+        self.dangXuat_1.setCheckable(True)
+        self.dangXuat_1.setObjectName("dangXuat_1")
+        self.verticalLayout_3.addWidget(self.dangXuat_1)
         self.gridLayout.addWidget(self.icon_onl_widget, 0, 0, 1, 1)
         self.icon_name_widget = QtWidgets.QWidget(parent=self.centralwidget)
         self.icon_name_widget.setStyleSheet("QWidget{\n"
@@ -768,11 +768,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addLayout(self.verticalLayout_2)
         spacerItem3 = QtWidgets.QSpacerItem(20, 377, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_4.addItem(spacerItem3)
-        self.pushButton_16 = QtWidgets.QPushButton(parent=self.icon_name_widget)
-        self.pushButton_16.setIcon(icon7)
-        self.pushButton_16.setCheckable(True)
-        self.pushButton_16.setObjectName("pushButton_16")
-        self.verticalLayout_4.addWidget(self.pushButton_16)
+        self.dangXuat_2 = QtWidgets.QPushButton(parent=self.icon_name_widget)
+        self.dangXuat_2.setIcon(icon7)
+        self.dangXuat_2.setCheckable(True)
+        self.dangXuat_2.setObjectName("dangXuat_2")
+        self.verticalLayout_4.addWidget(self.dangXuat_2)
         self.gridLayout.addWidget(self.icon_name_widget, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -787,8 +787,8 @@ class Ui_MainWindow(object):
         self.nhanvien_2.toggled['bool'].connect(self.nhanvien_1.setChecked) # type: ignore
         self.donhang_2.toggled['bool'].connect(self.donhang_1.setChecked) # type: ignore
         self.doanhthu_2.toggled['bool'].connect(self.doanhthu_1.setChecked) # type: ignore
-        self.pushButton_6.toggled['bool'].connect(MainWindow.close) # type: ignore
-        self.pushButton_16.toggled['bool'].connect(MainWindow.close) # type: ignore
+        self.dangXuat_1.toggled['bool'].connect(MainWindow.close) # type: ignore
+        self.dangXuat_2.toggled['bool'].connect(MainWindow.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -857,7 +857,7 @@ class Ui_MainWindow(object):
         self.btn_suadh.setText(_translate("MainWindow", "Sửa"))
         self.btn_xoadh.setText(_translate("MainWindow", "Xóa"))
         self.groupBox_8.setTitle(_translate("MainWindow", "Danh sách đơn hàng"))
-        self.timKiemdh.setText(_translate("MainWindow", "Nhập mã đơn hàng"))
+        self.timKiemdh.setText(_translate("MainWindow", "Nhập tên khách hàng"))
         self.btn_timKiemdh.setText(_translate("MainWindow", "Tìm kiếm"))
         self.groupBox_9.setTitle(_translate("MainWindow", "Danh sách đơn hàng đã giao"))
         self.label_8.setText(_translate("MainWindow", "Tổng doanh thu cửa hàng :"))
@@ -869,7 +869,7 @@ class Ui_MainWindow(object):
         self.nhanvien_2.setText(_translate("MainWindow", "Nhân viên"))
         self.donhang_2.setText(_translate("MainWindow", "Đơn hàng"))
         self.doanhthu_2.setText(_translate("MainWindow", "Doanh thu"))
-        self.pushButton_16.setText(_translate("MainWindow", "Đăng xuất"))
+        self.dangXuat_2.setText(_translate("MainWindow", "Đăng xuất"))
 
 
 if __name__ == "__main__":

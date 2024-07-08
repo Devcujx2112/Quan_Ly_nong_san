@@ -15,13 +15,14 @@ class login_Window(QMainWindow,Ui_MainLogin):
         ip.uic.loadUi('login.ui',self)
         self.btn_login.clicked.connect(self.loginApp)
         
+        
     def loginApp(self):
         tk = self.username.text()
         mk = self.password.text()
         kt = ip.ConnectDB.loginApp(tk, mk)
         if kt:
             widget.setFixedHeight(750)
-            widget.setFixedWidth(800)
+            widget.setFixedWidth(850)
             widget.move(250, 100)
             widget.setCurrentIndex(1)
         else:
@@ -36,6 +37,10 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("SideBar Menu")
         self.icon_name_widget.setHidden(True)
+
+# ___________________________________________________________________________________________________
+#btn dang xuat
+      
 # ___________________________________________________________________________________________________
 #Btn chuyển trang
 
@@ -50,6 +55,11 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
         self.doanhthu_1.clicked.connect(self.switch_to_doanhThu_page)
         self.doanhthu_2.clicked.connect(self.switch_to_doanhThu_page)
+
+        self.dangXuat_1.clicked.connect(self.switch_to_DangXuatPage)
+        self.dangXuat_2.clicked.connect(self.switch_to_DangXuatPage)
+
+        
 # ___________________________________________________________________________________________________
 # #Btn sản phẩm
         self.showSanPham()
@@ -83,6 +93,23 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.xuatExcel.clicked.connect(self.xuatFileExcel)
 # ___________________________________________________________________________________________________
 
+    def switch_to_DangXuatPage(self):
+        reply = ip.QMessageBox.question(self, 'Xác nhận', 
+                                     "Bạn có muốn đăng xuất không?", 
+                                     ip.QMessageBox.StandardButton.Yes | ip.QMessageBox.StandardButton.No, 
+                                     ip.QMessageBox.StandardButton.No)
+
+        if reply == ip.QMessageBox.StandardButton.Yes:
+            print("dang xuat")
+            
+            widget.setFixedHeight(550)
+            widget.setFixedWidth(790)
+            widget.move(250, 100)
+            widget.setCurrentIndex(0)
+            print("Đăng xuất ngay!")
+        else:
+            print("Hủy đăng xuất") 
+
 #Hàm chuyển trang
     def switch_to_sanPham_page(self):
         self.stackedWidget.setCurrentIndex(0)
@@ -91,10 +118,14 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(1)
 
     def switch_to_donhang_page(self):
+        self.showDonHang()
         self.stackedWidget.setCurrentIndex(3)
 
     def switch_to_doanhThu_page(self):
         self.stackedWidget.setCurrentIndex(4)
+    
+    def click_DangXuat(self):
+        self.close()
 
 # ___________________________________________________________________________________________________
 #Hàm quản lý sản phẩm
@@ -262,6 +293,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 # ___________________________________________________________________________________________________
 #Hàm qly đơn hàng
     def showDonHang(self):
+        self.masp_dh.clear()
         for i in range(ip.DAL_SanPham.showSanPham().__len__()):
             self.masp_dh.addItem(str(ip.DAL_SanPham.showSanPham()[i][0]))
         self.tbl_donHang.setRowCount(ip.DAL_DonHang.showDonhang().__len__())
@@ -305,7 +337,6 @@ class MySideBar(QMainWindow, Ui_MainWindow):
        
 
         giaBan = ip.DAL_SanPham.GiaSanPham(masp)[0][0]
-    
         if giaBan is not None:
         # Tính tổng tiền
             tongTien = soLuong * giaBan
@@ -322,6 +353,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         else:
             ip.QMessageBox.information(self, "Thông báo", "Không tìm thấy giá bán cho mã sản phẩm đã chọn!")
         giaBan = 0
+        self.showDonHang()
     def updateDonHang(self):
         madh = self.madh.text()
         masp = self.masp_dh.currentText()
@@ -402,7 +434,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         tinhTong =  ip.DAL_DonHang.tinhTongTien()
         self.tong_doanh_thu.setText(str(tinhTong))
         self.showDoanhThu()
-    
+        return tinhTong
     def xuatFileExcel(self):
         try:
             default_dir = os.path.expanduser("D:\Du an Python\Cuoi_ky")  
@@ -424,7 +456,11 @@ class MySideBar(QMainWindow, Ui_MainWindow):
             for row_index, row_data in enumerate(ip.DAL_DonHang.ThongKe(), start=2):
                 for col_index, cell_value in enumerate(row_data, start=1):
                     sheet.cell(row=row_index, column=col_index, value=str(cell_value))
-        
+
+            tinhTong = self.tinhTong()
+            row_tinhTong = sheet.max_row + 2  # Tính vị trí hàng tiếp theo để ghi tổng doanh thu
+            sheet.cell(row=row_tinhTong, column=1, value='Tổng doanh thu :')
+            sheet.cell(row=row_tinhTong, column=2, value=str(tinhTong))
         # Lưu workbook vào file Excel
             wb.save(file_path)
         
@@ -444,7 +480,7 @@ mainGui_f = MySideBar()
 widget.addWidget(login_f)
 widget.addWidget(mainGui_f)
 widget.setCurrentIndex(0)
-widget.setFixedHeight(600)
-widget.setFixedWidth(900)
+widget.setFixedHeight(550)
+widget.setFixedWidth(790)
 widget.show()
 app.exec()

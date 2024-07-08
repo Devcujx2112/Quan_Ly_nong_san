@@ -29,7 +29,6 @@ def GiaSanPham(masp):
     rs = cs.fetchall()
     conn.close()
     return rs
-
 def addSanPham(masp, tensp, soLuong, giaNhap, giaBan, moTa):
     try:
         conn = ConnectDB.Connect()
